@@ -1,5 +1,5 @@
 // import user model
-const { Recipe } = require('../models/Recipe');
+const { Recipe } = require('../models/index');
 
 
 module.exports = {
@@ -46,7 +46,7 @@ module.exports = {
       image: body.image,
       link: body.link
     };
-    
+
     const recipe = await Recipe.findOneAndUpdate(id, updated, {
       new: true
     });
