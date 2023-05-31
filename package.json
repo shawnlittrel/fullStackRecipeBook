@@ -7,14 +7,17 @@
     "start": "npm run build && cd server && node server.js",
     "server": "cd server nodemon server.js --ignore client",
     "build": "cd client && npm run build",
-    "install": "cd server && npm i && cd ../client && npm i",
     "client": "cd client && npm start"
   },
   "dependencies": {
     "express": "^4.17.1"
   },
   "devDependencies": {
+    "autoprefixer": "^10.4.14",
     "concurrently": "^5.2.0",
-    "nodemon": "^2.0.4"
+    "nodemon": "^2.0.4",
+    "postcss": "^8.4.21",
+    "svelte-preprocess": "^5.0.3",
+    "tailwindcss": "^3.2.7"
   }
 }

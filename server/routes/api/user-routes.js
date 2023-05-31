@@ -3,10 +3,12 @@ const {
   createUser,
   getSingleUser,
   getAllUsers,
-saveRecipe,
-deleteRecipe,
   login,
+  saveRecipe,
+  deleteRecipe
 } = require('../../controllers/user-controller');
+
+
 
 // import middleware
 const { authMiddleware } = require('../../utils/auth');
@@ -22,6 +24,10 @@ router.route('/login').post(login);
 
 router.route('/me').get(authMiddleware, getSingleUser);
 
-router.route('/books/:bookId').delete(authMiddleware, deleteRecipe);
+router.route('/saveRecipe/:recipeId')
+.put(authMiddleware, saveRecipe)
+.delete(authMiddleware, deleteRecipe);
+
+
 
 module.exports = router;
