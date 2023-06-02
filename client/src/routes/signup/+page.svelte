@@ -1,4 +1,7 @@
 <script>
+	import { goto } from "$app/navigation";
+	import { token } from "../../stores";
+
   const url = "localhost:3001"
   let email = "";
   let username = "";
@@ -15,6 +18,7 @@
       "password": password
     };
 
+    //create the user
     const response = await fetch("http://localhost:3001/api/users/", {
       method: "POST",
       headers: {
@@ -24,7 +28,16 @@
     });
 
     const data = await response.json();
-    console.log(data);
+    
+    //set the token to the global store
+    if (data.token) {
+      token.update(t => t = data.token);
+      console.log(token);
+    }
+
+    //redirect to dashboard
+    goto('/addRecipe');
+
   };
 
 </script>

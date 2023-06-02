@@ -1,11 +1,14 @@
 <script>
-  const url = "localhost:3001"
+	import { goto } from "$app/navigation";
+	import { token } from "../../stores";
+  const url = "http://localhost:3001"
   let title = "";
   let description = "";
   let directions = "";
   let notes = "";
   let image = "";
   let link = "";
+
   async function addRecipe() {
     const data = {
       title,
@@ -16,16 +19,23 @@
       link
     };
 
-    const response = await fetch(`${url}/api/recipes`, {
+		if (!token) {
+			await alert('You need to login first');
+			goto('/login');
+		} else {
+			const response = await fetch(`${url}/api/recipes`, {
       method: "POST",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+				"Authentication": `Bearer ${token}`
       },
       body: JSON.stringify(data)
     });
 
     const postData = await response.json();
     console.log(postData);
+		}
+
 
 
     // console.log('added')
@@ -41,24 +51,6 @@
     // const response
   }
 </script>
-
-<style>
-	label {
-		display: block;
-		text-align: right;
-	}
-
-	.formInput {
-		border: 1px solid black;
-		width: 100%;
-	}
-
-	.pageHeader {
-		text-align: center;
-		font-size: 24pt;
-		color: red;
-	}
-</style>
 
 <h1 class="pageHeader">Add A Recipe Here</h1>
 
@@ -108,11 +100,26 @@
 	</div>
 	<div class="col-span-3" />
 
-  <div class="col-span-12 text-center">
-    <button on:click|preventDefault={addRecipe}>Submit</button>
-  </div>
+	<div class="col-span-12 text-center">
+		<button on:click|preventDefault={addRecipe}>Submit</button>
+	</div>
 </form>
 <div class="col-span-3" />
 
+<style>
+	label {
+		display: block;
+		text-align: right;
+	}
 
+	.formInput {
+		border: 1px solid black;
+		width: 100%;
+	}
 
+	.pageHeader {
+		text-align: center;
+		font-size: 24pt;
+		color: red;
+	}
+</style>
