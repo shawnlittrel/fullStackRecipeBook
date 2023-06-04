@@ -16,8 +16,8 @@ module.exports = {
     res.json(foundRecipe);
   },
 
-  async getAllRecipes(req, res) {
-    const recipes = await Recipe.find();
+  async getAllRecipes({ params }, res) {
+    const recipes = await Recipe.find().limit(params.pageSize).skip(params.pageSize * params.page);
 
     if (!recipes) return res.status(400).json({ message: "No recipes found."});
 

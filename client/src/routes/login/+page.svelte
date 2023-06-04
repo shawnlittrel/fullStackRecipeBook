@@ -1,4 +1,5 @@
 <script>
+	import { goto } from "$app/navigation";
   import { token } from "../../stores";
   const url = "http://localhost:3001/api"
   let email = "";
@@ -32,6 +33,13 @@
     token.update(t => t = data.token);
     console.log('token', tokenValue);
 
+    if (response.ok) {
+      goto("/addRecipe")
+    } else {
+      console.log('login failed');
+      //TODO: add modal for login fail status
+    }
+
   }
 </script>
 
@@ -59,7 +67,7 @@
   </div>
   <div class="col-span-3" />
 
-  <div class="col-sm-12 text-center">
+  <div class="col-span-12 text-center">
     <button on:click|preventDefault={login}>Login!</button>
   </div>
 </form>
