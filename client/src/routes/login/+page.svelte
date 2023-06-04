@@ -1,7 +1,7 @@
 <script>
 	import { goto } from "$app/navigation";
   import { token } from "../../stores";
-  const url = "http://localhost:3001/api"
+  import { url } from '../../stores';
   let email = "";
   let password = "";
   let tokenValue= "";
@@ -34,7 +34,7 @@
     console.log('token', tokenValue);
 
     if (response.ok) {
-      goto("/addRecipe")
+      goto("/allrecipes")
     } else {
       console.log('login failed');
       //TODO: add modal for login fail status

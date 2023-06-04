@@ -1,7 +1,7 @@
 <script>
 	import { goto } from "$app/navigation";
 	import { token } from "../../stores";
-  const url = "http://localhost:3001"
+  import { url } from "../../stores";
   let title = "";
   let description = "";
   let directions = "";
