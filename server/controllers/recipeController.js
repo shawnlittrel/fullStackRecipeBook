@@ -16,8 +16,12 @@ module.exports = {
     res.json(foundRecipe);
   },
 
-  async getAllRecipes({ params }, res) {
-    const recipes = await Recipe.find().limit(params.pageSize).skip(params.pageSize * params.page);
+  async getAllRecipes(req, res) {
+    const pageInt = parseInt(req.query.page);
+    const sizeInt = parseInt(req.query.pageSize);
+    console.log('page', pageInt);
+    console.log('size', sizeInt);
+    const recipes = await Recipe.find({}).limit(sizeInt).skip(sizeInt * pageInt);
 
     if (!recipes) return res.status(400).json({ message: "No recipes found."});
 
@@ -34,17 +38,17 @@ module.exports = {
     res.json(recipe);
   },
 
-  async updateRecipe({ body, params } , res) {
-    console.log('body', body);
-    console.log('id', params.id);
-    const id = params.id
+  async updateRecipe(req, res) {
+    console.log('body', req.body);
+    console.log('id', req.params.id);
+    const id = req.params.id
     const updated = {
-      title: body.title,
-      description: body.description,
-      directions: body.directions,
-      notes: body.notes,
-      image: body.image,
-      link: body.link
+      title: req.body.title,
+      description: req.body.description,
+      directions: req.body.directions,
+      notes: req.body.notes,
+      image: req.body.image,
+      link: req.body.link
     };
 
     const recipe = await Recipe.findOneAndUpdate(id, updated, {
