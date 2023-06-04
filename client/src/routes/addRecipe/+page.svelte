@@ -34,25 +34,14 @@
 
     const postData = await response.json();
     console.log(postData);
+		if (response.ok) {
+			console.log('all good!')
+			//TODO: add a modal showing confirmation of submission
 		}
-
-
-
-    // console.log('added')
-    // console.log(`${url}/api/recipes`)
-    // const title = document.querySelector("#recipeTitle")?.value;
-    // const description = document.querySelector("#description")?.textContent;
-    // const directions = document.querySelector("#directions")?.textContent;
-    // const notes = document.querySelector("#notes")?.textContent;
-    // const image = document.querySelector("#imageLink")?.value;
-    // const link = document.querySelector("#recipeLink")?.value;
-
-
-    // const response
-  }
+	}
+};
 </script>
 
-<h1 class="pageHeader">Add A Recipe Here</h1>
 
 <div class="col-span-3" />
 <form class="grid grid-cols-12 gap-6">
